@@ -1,5 +1,10 @@
 # React-shop-cloudfront
 
+## DEPLOY LINKS
+
+[S3 Bucket - 403](https://nodejs-aws-shop-react-egatsak.s3.eu-north-1.amazonaws.com/)
+[Cloudfront CDN](https://d1uqx1jhbm356g.cloudfront.net/)
+
 This is frontend starter project for nodejs-aws mentoring program. It uses the following technologies:
 
 - [Vite](https://vitejs.dev/) as a project bundler
