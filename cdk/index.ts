@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { App, Stack } from "aws-cdk-lib";
 import { StaticSite } from "./static-site";
 

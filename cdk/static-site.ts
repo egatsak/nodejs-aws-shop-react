@@ -10,6 +10,31 @@ import { aws_cloudfront as cloudfront } from "aws-cdk-lib";
 export class StaticSite extends Construct {
   constructor(parent: Stack, name: string) {
     super(parent, name);
+    /* 
+    const cfnExecRole = new iam.Role(this, "CfnExecRole", {
+      assumedBy: new iam.ArnPrincipal(
+        "arn:aws:sts::263622645179:assumed-role/AWSReservedSSO_PowerUserAccess_7a980f367bc73c6d/egatsak-iam-poweruser_not_admin"
+      ),
+    });
+
+    // Create the policy statement
+    const policyStatement = new iam.PolicyStatement({
+      effect: iam.Effect.ALLOW,
+      actions: ["iam:GetRole", "iam:PassRole"],
+      resources: ["*"], // You can adjust this to limit the resources as needed.
+    });
+
+    // Create a managed policy and add the statement
+    const inlinePolicy = new iam.ManagedPolicy(
+      this,
+      "CfnExecRoleInlinePolicy",
+      {
+        statements: [policyStatement],
+      }
+    );
+
+    // Attach the managed policy to the role
+    cfnExecRole.addManagedPolicy(inlinePolicy); */
 
     const cloudFrontOAI = new cloudfront.OriginAccessIdentity(
       this,
@@ -56,7 +81,7 @@ export class StaticSite extends Construct {
     );
 
     new s3deploy.BucketDeployment(this, "MyShopCdk-Bucket-Deployment", {
-      sources: [s3deploy.Source.asset("../dist/index.html")],
+      sources: [s3deploy.Source.asset("dist")],
       destinationBucket: siteBucket,
       distribution,
       distributionPaths: ["/*"],
