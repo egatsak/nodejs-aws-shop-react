@@ -4,7 +4,7 @@ import App from "~/components/App/App";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import { BrowserRouter } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
 
@@ -12,6 +12,11 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: { refetchOnWindowFocus: false, retry: false, staleTime: Infinity },
   },
+  queryCache: new QueryCache({
+    onError: (error) => {
+      alert(JSON.stringify(error));
+    },
+  }),
 });
 
 if (import.meta.env.DEV) {
