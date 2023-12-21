@@ -7,6 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { QueryCache, QueryClient, QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { theme } from "~/theme";
+import axios from "axios";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -14,7 +15,21 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error) => {
-      alert(JSON.stringify(error));
+      console.error(`Error caught by QueryClient: ${JSON.stringify(error)}`);
+
+      if (axios.isAxiosError(error)) {
+        if (error.config.url?.endsWith("import")) {
+          if ([401, 403].includes(error.response?.status as number)) {
+            alert(
+              `Failed to retrieve upload URL. HTTP status code: ${error.response?.status}`
+            );
+          } else {
+            console.error(
+              `Query failed. Http status code: ${error.response?.status}`
+            );
+          }
+        }
+      }
     },
   }),
 });
