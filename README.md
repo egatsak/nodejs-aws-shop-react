@@ -5,7 +5,7 @@ Deployed into AWS cloud using [AWS CDK](https://aws.amazon.com/cdk/).
 
 ## Deploy
 
-[S3 Bucket - shows 403](https://nodejs-aws-shop-react-egatsak-cdk.s3-website-us-east-1.amazonaws.com/index.html) - resources stored at S3 bucket are blocked form public access
+[S3 Bucket - shows 403](http://nodejs-aws-shop-react-egatsak-cdk.s3-website-us-east-1.amazonaws.com/index.html) - resources stored at S3 bucket are blocked from public access
 
 [Cloudfront CDN](https://d1svs9tsn43rrf.cloudfront.net/) - deployed app available online. 
 
