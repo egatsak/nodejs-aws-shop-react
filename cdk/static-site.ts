@@ -12,36 +12,6 @@ export class StaticSite extends Construct {
   constructor(parent: Stack, name: string) {
     super(parent, name);
 
-    /* const cfnExecRole = new iam.Role(this, "CfnExecRole", {
-      assumedBy: new iam.ArnPrincipal(
-        "arn:aws:sso:::permissionSet/ssoins-6987134914726260/ps-4b533229d7158adb"
-      ),
-    });
-
-    // Create the policy statement
-    const policyStatement = new iam.PolicyStatement({
-      effect: iam.Effect.ALLOW,
-      actions: ["iam:GetRole", "iam:PassRole"],
-      resources: ["*"], // You can adjust this to limit the resources as needed.
-    });
-
-    // Create a managed policy and add the statement
-    const inlinePolicy = new iam.ManagedPolicy(
-      this,
-      "CfnExecRoleInlinePolicy",
-      {
-        statements: [policyStatement],
-      }
-    );
-
-    // Attach the managed policy to the role
-    cfnExecRole.addManagedPolicy(inlinePolicy); */
-
-    /*     const cloudFrontOAI = new cloudfront.OriginAccessIdentity(
-      this,
-      "MyShopCdk-OAI"
-    ); */
-
     const originAccessControl = new cloudfront.CfnOriginAccessControl(
       this,
       "MyOriginAccessControl",
@@ -62,38 +32,6 @@ export class StaticSite extends Construct {
       encryption: s3.BucketEncryption.S3_MANAGED,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
     });
-
-    /*  siteBucket.addToResourcePolicy(
-      new iam.PolicyStatement({
-        actions: ["S3:GetObject"],
-        resources: [siteBucket.arnForObjects("*")],
-        principals: [
-          new iam.CanonicalUserPrincipal(
-            cloudFrontOAI.cloudFrontOriginAccessIdentityS3CanonicalUserId
-          ),
-        ],
-      })
-    ); */
-
-    /*     const distribution = new cloudfront.CloudFrontWebDistribution(
-      this,
-      "MyShopCdk-Distribution",
-      {
-        originConfigs: [
-          {
-            s3OriginSource: {
-              s3BucketSource: siteBucket,
-              originAccessIdentity: cloudFrontOAI,
-            },
-            behaviors: [
-              {
-                isDefaultBehavior: true,
-              },
-            ],
-          },
-        ],
-      }
-    ); */
 
     const distribution = new cloudfront.CloudFrontWebDistribution(
       this,
@@ -127,7 +65,7 @@ export class StaticSite extends Construct {
       originAccessControl.getAtt("Id")
     );
 
-    // workaround to use Cache Policy instead of legacy Cache Behavior
+    // using Cache Policy instead of obsolete Cache Behavior
     cfnDistribution.addPropertyDeletionOverride(
       "DistributionConfig.DefaultCacheBehavior.AllowedMethods"
     );
