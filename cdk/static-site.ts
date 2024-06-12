@@ -32,6 +32,7 @@ export class StaticSite extends Construct {
       encryption: s3.BucketEncryption.S3_MANAGED,
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       autoDeleteObjects: true,
+      removalPolicy: RemovalPolicy.DESTROY,
     });
 
     const distribution = new cloudfront.CloudFrontWebDistribution(
