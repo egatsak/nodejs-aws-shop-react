@@ -9,6 +9,8 @@ Deployed into AWS cloud using [AWS CDK](https://aws.amazon.com/cdk/).
 
 [Cloudfront CDN](https://d1svs9tsn43rrf.cloudfront.net/) - deployed app available online. 
 
+[Backend repository](https://github.com/egatsak/nodejs-aws-shop-backend)
+
 ## Available Scripts
 
 ### `cdk:bootstrap`
