@@ -1,8 +1,8 @@
 const API_PATHS = {
-  product: "https://km96rjp673.execute-api.us-east-1.amazonaws.com/products",
+  product: "https://km96rjp673.execute-api.us-east-1.amazonaws.com/dev",
   order:
     "https://nodejs-aws-shop-react-egatsak.execute-api.eu-north-1.amazonaws.com/dev",
-  import: "https://6iu6ypqf11.execute-api.eu-north-1.amazonaws.com/prod",
+  import: "https://i3jtq6hsag.execute-api.us-east-1.amazonaws.com/dev",
   bff: "https://nodejs-aws-shop-react-egatsak.execute-api.eu-north-1.amazonaws.com/dev",
   cart: "https://nodejs-aws-shop-react-egatsak.execute-api.eu-north-1.amazonaws.com/dev",
 };

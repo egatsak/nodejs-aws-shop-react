@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-import { App, Stack } from "aws-cdk-lib";
+import { App, Stack, StackProps } from "aws-cdk-lib";
 import { StaticSite } from "./static-site";
 
 class MyStaticSiteStack extends Stack {
-  constructor(parent: App, name: string) {
-    super(parent, name);
+  constructor(parent: App, name: string, props?: StackProps) {
+    super(parent, name, props);
 
     new StaticSite(this, "ShopCdkStaticSite");
   }
@@ -13,6 +13,10 @@ class MyStaticSiteStack extends Stack {
 
 const app = new App();
 
-new MyStaticSiteStack(app, "MyShopCdkStaticSite");
+new MyStaticSiteStack(app, "MyShopCdkStaticSite", {
+  env: {
+    region: process.env.AWS_REGION ?? "us-east-1",
+  },
+});
 
 app.synth();
