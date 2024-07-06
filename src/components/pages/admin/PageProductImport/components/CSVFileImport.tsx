@@ -11,7 +11,6 @@ type CSVFileImportProps = {
 
 export default function CSVFileImport({ url, title }: CSVFileImportProps) {
   const [file, setFile] = React.useState<File | undefined>();
-  const [enabled, setEnabled] = React.useState(false);
 
   const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = e.target.files;
@@ -21,38 +20,24 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     }
   };
 
-  const response = useRetrieveProductsCsvUploadUrl(url, enabled, file?.name);
-
-  React.useEffect(() => {
-    if (enabled && file) {
-      uploadFile(file);
-    }
-  }, [enabled, file]);
+  const response = useRetrieveProductsCsvUploadUrl(url, file?.name);
 
   const removeFile = () => {
     setFile(undefined);
-    setEnabled(false);
   };
 
-  const uploadFile = async (file: File) => {
+  const uploadFile = async () => {
     console.log("uploadFile to", url);
 
     if (file) {
       console.log("File to upload: ", file.name);
 
-      if (response.data?.uploadUrl) {
-        console.log("Uploading to: ", response.data?.uploadUrl);
-        const result = await axios.put(response.data.uploadUrl, file);
-        console.log("Result: ", result);
-      }
+      console.log("Uploading to: ", response.data?.uploadUrl);
+      const result = await axios.put(response.data?.uploadUrl as string, file);
+      console.log("Result: ", result);
 
-      setEnabled(false);
       setFile(undefined);
     }
-  };
-
-  const onUploadClick = () => {
-    setEnabled(true);
   };
 
   return (
@@ -65,7 +50,7 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
       ) : (
         <div>
           <button onClick={removeFile}>Remove file</button>
-          <button onClick={onUploadClick}>Upload file</button>
+          <button onClick={uploadFile}>Upload file</button>
         </div>
       )}
     </Box>

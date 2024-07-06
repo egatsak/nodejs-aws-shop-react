@@ -68,7 +68,6 @@ export function useDeleteAvailableProduct() {
 
 export function useRetrieveProductsCsvUploadUrl(
   baseUrl: string,
-  enabled: boolean,
   fileName?: string
 ) {
   return useQuery<{ uploadUrl: string }, AxiosError>(
@@ -87,7 +86,7 @@ export function useRetrieveProductsCsvUploadUrl(
     },
     {
       staleTime: 0,
-      enabled: enabled && !!fileName,
+      enabled: !!fileName,
     }
   );
 }
