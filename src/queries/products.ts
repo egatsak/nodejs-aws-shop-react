@@ -67,15 +67,16 @@ export function useDeleteAvailableProduct() {
 }
 
 export function useRetrieveProductsCsvUploadUrl(
-  fileName: string,
-  baseUrl: string
+  baseUrl: string,
+  enabled: boolean,
+  fileName?: string
 ) {
   return useQuery<{ uploadUrl: string }, AxiosError>(
     `import?name=${fileName}`,
     async () => {
       const response = await axios.get<{ uploadUrl: string }>(baseUrl, {
         params: {
-          name: encodeURIComponent(fileName),
+          name: encodeURIComponent(fileName ?? ""),
         },
         headers: {
           Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
@@ -86,9 +87,7 @@ export function useRetrieveProductsCsvUploadUrl(
     },
     {
       staleTime: 0,
-      cacheTime: 0,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
+      enabled: enabled && !!fileName,
     }
   );
 }
