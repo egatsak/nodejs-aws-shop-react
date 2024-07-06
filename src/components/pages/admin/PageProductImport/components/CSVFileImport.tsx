@@ -32,9 +32,11 @@ export default function CSVFileImport({ url, title }: CSVFileImportProps) {
     if (file) {
       console.log("File to upload: ", file.name);
 
-      console.log("Uploading to: ", response.data?.uploadUrl);
-      const result = await axios.put(response.data?.uploadUrl as string, file);
-      console.log("Result: ", result);
+      if (response.data?.uploadUrl) {
+        console.log("Uploading to: ", response.data?.uploadUrl);
+        const result = await axios.put(response.data?.uploadUrl, file);
+        console.log("Result: ", result);
+      }
 
       setFile(undefined);
     }

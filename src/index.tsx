@@ -31,7 +31,7 @@ const queryClient = new QueryClient({
           );
         }
       } else {
-        console.log(`React Query error: ${JSON.stringify(error)}`);
+        console.log(`React Query error: ${error}`);
       }
     },
   }),
