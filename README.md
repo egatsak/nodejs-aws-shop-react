@@ -11,6 +11,12 @@ Deployed into AWS cloud using [AWS CDK](https://aws.amazon.com/cdk/).
 
 [Backend repository](https://github.com/egatsak/nodejs-aws-shop-backend)
 
+## Authorization
+
+Custom lambda authorizer has been attached to `/import` endpoint. Authorization token `{github-account}:{PASSWORD}` is hard-coded and is set to local storage on application bootstrap.
+
+[AWS Cognito User Pool App Client Hosted UI](https://dosfklikrk6wd.auth.us-east-1.amazoncognito.com/oauth2/authorize?client_id=amj83gn4f7cr7rbidsls1s2nr&response_type=code&scope=email+openid+phone&redirect_uri=https%3A%2F%2Fdosfklikrk6wd.cloudfront.net%2F) - configured via AWS Console. Redirects to app upon signing-in.
+
 ## Available Scripts
 
 ### `cdk:bootstrap`
