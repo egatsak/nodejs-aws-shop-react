@@ -15,7 +15,10 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error) => {
-      if (error instanceof AxiosError && error.config.url?.endsWith("import")) {
+      if (
+        error instanceof AxiosError &&
+        error.config?.url?.endsWith("import")
+      ) {
         if (error.response?.status === 401 || error.response?.status === 403) {
           window.alert(
             `Authorization failed. Unable to retrieve signed URL for CSV file import. Status code: ${error.response.status}`
