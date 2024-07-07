@@ -1,4 +1,3 @@
-import { Buffer } from "buffer";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -37,15 +36,7 @@ const queryClient = new QueryClient({
   }),
 });
 
-if (import.meta.env.DEV) {
-  const { worker } = await import("./mocks/browser");
-  worker.start({ onUnhandledRequest: "bypass" });
-}
-
-localStorage.setItem(
-  "authorization_token",
-  Buffer.from("egatsak:TEST_PASSWORD").toString("base64")
-);
+localStorage.setItem("authorization_token", `ZWdhdHNhazpURVNUX1BBU1NXT1JE`);
 
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
