@@ -77,9 +77,13 @@ export function useRetrieveProductsCsvUploadUrl(
         params: {
           name: encodeURIComponent(fileName ?? ""),
         },
-        headers: {
-          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
-        },
+        ...(localStorage.getItem("authorization_token") && {
+          headers: {
+            Authorization: `Basic ${localStorage.getItem(
+              "authorization_token"
+            )}`,
+          },
+        }),
       });
 
       return response.data;

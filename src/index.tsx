@@ -39,7 +39,11 @@ const queryClient = new QueryClient({
   }),
 });
 
-localStorage.setItem("authorization_token", `ZWdhdHNhazpURVNUX1BBU1NXT1JE`);
+/* 
+localStorage.setItem(
+  "authorization_token",
+  `ZWdhdHNhazpURVNUX1BBU1NXT1JE`
+); */
 
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
