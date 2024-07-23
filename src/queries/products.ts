@@ -65,3 +65,28 @@ export function useDeleteAvailableProduct() {
     })
   );
 }
+
+export function useRetrieveProductsCsvUploadUrl(
+  baseUrl: string,
+  fileName?: string
+) {
+  return useQuery<{ uploadUrl: string }, AxiosError>(
+    `import?name=${fileName}`,
+    async () => {
+      const response = await axios.get<{ uploadUrl: string }>(baseUrl, {
+        params: {
+          name: encodeURIComponent(fileName ?? ""),
+        },
+        headers: {
+          Authorization: `Basic ${localStorage.getItem("authorization_token")}`,
+        },
+      });
+
+      return response.data;
+    },
+    {
+      staleTime: 0,
+      enabled: !!fileName,
+    }
+  );
+}
