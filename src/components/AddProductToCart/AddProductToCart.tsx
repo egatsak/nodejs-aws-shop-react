@@ -27,7 +27,7 @@ export default function AddProductToCart({ product }: AddProductToCartProps) {
   const removeProduct = () => {
     if (cartItem) {
       upsertCart(
-        { ...cartItem, count: cartItem.count - 1 },
+        { product, count: cartItem.count - 1 },
         { onSuccess: invalidateCart }
       );
     }
