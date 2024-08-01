@@ -1,4 +1,3 @@
-import { Buffer } from "buffer";
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
@@ -16,7 +15,10 @@ const queryClient = new QueryClient({
   },
   queryCache: new QueryCache({
     onError: (error) => {
-      if (error instanceof AxiosError && error.config.url?.endsWith("import")) {
+      if (
+        error instanceof AxiosError &&
+        error.config?.url?.endsWith("import")
+      ) {
         if (error.response?.status === 401 || error.response?.status === 403) {
           window.alert(
             `Authorization failed. Unable to retrieve signed URL for CSV file import. Status code: ${error.response.status}`
@@ -37,15 +39,11 @@ const queryClient = new QueryClient({
   }),
 });
 
-if (import.meta.env.DEV) {
-  const { worker } = await import("./mocks/browser");
-  worker.start({ onUnhandledRequest: "bypass" });
-}
-
+/* 
 localStorage.setItem(
   "authorization_token",
-  Buffer.from("egatsak:TEST_PASSWORD").toString("base64")
-);
+  `ZWdhdHNhazpURVNUX1BBU1NXT1JE`
+); */
 
 const container = document.getElementById("app");
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
