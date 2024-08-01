@@ -63,9 +63,10 @@ export default function PageCart() {
         productId: i.product.id,
         count: i.count,
       })),
-      address,
+      //address,
+      comments: Object.values(address).join(","),
     };
-
+    // @ts-ignore
     submitOrder(values as Omit<Order, "id">, {
       onSuccess: () => {
         setActiveStep(activeStep + 1);
